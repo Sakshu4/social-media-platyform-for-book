@@ -1,12 +1,9 @@
 import { useState, useEffect } from 'react';
-import { auth } from '@/src/lib/firebase';
-import {
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-  User,
-} from 'firebase/auth';
+
+interface User {
+  id: string;
+  email: string;
+}
 
 interface AuthState {
   user: User | null;
@@ -17,24 +14,17 @@ interface AuthState {
 export function useAuth() {
   const [authState, setAuthState] = useState<AuthState>({
     user: null,
-    loading: true,
+    loading: false,
     error: null,
   });
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setAuthState((prev) => ({ ...prev, user, loading: false }));
-    });
-
-    return () => unsubscribe();
-  }, []);
-
   const login = async (email: string, password: string) => {
     try {
-      setAuthState((prev) => ({ ...prev, loading: true, error: null }));
-      await signInWithEmailAndPassword(auth, email, password);
+      setAuthState(prev => ({ ...prev, loading: true, error: null }));
+      // TODO: Implement actual authentication
+      console.log('Login attempted with:', email);
     } catch (error) {
-      setAuthState((prev) => ({
+      setAuthState(prev => ({
         ...prev,
         error: (error as Error).message,
         loading: false,
@@ -44,10 +34,11 @@ export function useAuth() {
 
   const register = async (email: string, password: string) => {
     try {
-      setAuthState((prev) => ({ ...prev, loading: true, error: null }));
-      await createUserWithEmailAndPassword(auth, email, password);
+      setAuthState(prev => ({ ...prev, loading: true, error: null }));
+      // TODO: Implement actual registration
+      console.log('Registration attempted with:', email);
     } catch (error) {
-      setAuthState((prev) => ({
+      setAuthState(prev => ({
         ...prev,
         error: (error as Error).message,
         loading: false,
@@ -57,10 +48,11 @@ export function useAuth() {
 
   const logout = async () => {
     try {
-      setAuthState((prev) => ({ ...prev, loading: true, error: null }));
-      await signOut(auth);
+      setAuthState(prev => ({ ...prev, loading: true, error: null }));
+      // TODO: Implement actual logout
+      setAuthState({ user: null, loading: false, error: null });
     } catch (error) {
-      setAuthState((prev) => ({
+      setAuthState(prev => ({
         ...prev,
         error: (error as Error).message,
         loading: false,

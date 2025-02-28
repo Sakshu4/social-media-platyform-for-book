@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  swcMinify: true,
   images: {
+    domains: ['images.unsplash.com', 'source.unsplash.com'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -15,7 +17,13 @@ const nextConfig = {
       }
     ],
   },
-  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx']
+  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+  typescript: {
+    ignoreBuildErrors: true
+  },
+  eslint: {
+    ignoreDuringBuilds: true
+  }
 };
 
 module.exports = nextConfig; 

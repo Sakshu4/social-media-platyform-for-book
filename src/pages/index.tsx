@@ -11,10 +11,18 @@ export default function HomePage() {
   const { isDarkMode } = useTheme();
 
   return (
-    <main className={`min-h-screen relative ${isDarkMode ? 'bg-dark-100' : 'bg-gray-50'}`}>
+    <main className={`min-h-screen relative ${
+      isDarkMode 
+        ? 'bg-gradient-to-b from-dark-400 via-dark-300 to-dark-400 text-white' 
+        : 'bg-gradient-to-b from-gray-50 via-white to-gray-50 text-gray-900'
+    }`}>
       <div className="relative z-10">
+        {/* Cyberpunk gradient overlay */}
+        {isDarkMode && (
+          <div className="absolute inset-0 bg-cyberpunk-gradient opacity-10 pointer-events-none" />
+        )}
         <Navbar />
-        <div className="space-y-20 pb-20">
+        <div className="space-y-4 pb-8">
           <HeroSection />
           <FeaturedBooks />
           <BookClubs />

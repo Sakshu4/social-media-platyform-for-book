@@ -1,12 +1,8 @@
 import { useState, useEffect } from 'react';
 
-interface User {
-  id: string;
-  email: string;
-}
-
+// Temporary mock implementation without Firebase
 interface AuthState {
-  user: User | null;
+  user: any | null;
   loading: boolean;
   error: string | null;
 }
@@ -19,45 +15,18 @@ export function useAuth() {
   });
 
   const login = async (email: string, password: string) => {
-    try {
-      setAuthState(prev => ({ ...prev, loading: true, error: null }));
-      // TODO: Implement actual authentication
-      console.log('Login attempted with:', email);
-    } catch (error) {
-      setAuthState(prev => ({
-        ...prev,
-        error: (error as Error).message,
-        loading: false,
-      }));
-    }
+    // Mock implementation
+    console.log('Login attempted:', { email, password });
   };
 
   const register = async (email: string, password: string) => {
-    try {
-      setAuthState(prev => ({ ...prev, loading: true, error: null }));
-      // TODO: Implement actual registration
-      console.log('Registration attempted with:', email);
-    } catch (error) {
-      setAuthState(prev => ({
-        ...prev,
-        error: (error as Error).message,
-        loading: false,
-      }));
-    }
+    // Mock implementation
+    console.log('Register attempted:', { email, password });
   };
 
   const logout = async () => {
-    try {
-      setAuthState(prev => ({ ...prev, loading: true, error: null }));
-      // TODO: Implement actual logout
-      setAuthState({ user: null, loading: false, error: null });
-    } catch (error) {
-      setAuthState(prev => ({
-        ...prev,
-        error: (error as Error).message,
-        loading: false,
-      }));
-    }
+    // Mock implementation
+    console.log('Logout attempted');
   };
 
   return {

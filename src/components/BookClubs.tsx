@@ -1,8 +1,10 @@
 'use client';
 
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Users, Calendar, MessageCircle } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
+import { useLoading } from '../contexts/LoadingContext';
 import Button from './Button';
 
 const bookClubs = [
@@ -37,9 +39,25 @@ const bookClubs = [
 
 const BookClubs = () => {
   const { isDarkMode } = useTheme();
+  const { startLoading, stopLoading } = useLoading();
+
+  useEffect(() => {
+    const loadClubs = async () => {
+      startLoading();
+      try {
+        // Increased loading time to 3 seconds
+        await new Promise(resolve => setTimeout(resolve, 3000));
+        // In real app, you would fetch clubs data here
+      } finally {
+        stopLoading();
+      }
+    };
+
+    loadClubs();
+  }, []);
 
   return (
-    <section className={`py-16 ${
+    <section className={`py-8 ${
       isDarkMode ? 'bg-dark-300' : 'bg-gray-50'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -48,7 +66,7 @@ const BookClubs = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-12"
+          className="text-center mb-8"
         >
           <h2 className={`text-3xl sm:text-4xl font-bold mb-4 ${
             isDarkMode
@@ -143,7 +161,7 @@ const BookClubs = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-center mt-12"
+          className="text-center mt-8"
         >
           <Button size="lg">
             View All Book Clubs

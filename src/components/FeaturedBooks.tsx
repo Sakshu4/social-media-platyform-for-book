@@ -1,9 +1,11 @@
 'use client';
 
+import { useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, EffectCoverflow } from 'swiper/modules';
 import { motion } from 'framer-motion';
 import { useTheme } from '../contexts/ThemeContext';
+import { useLoading } from '../contexts/LoadingContext';
 import BookCard from './BookCard';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -48,9 +50,25 @@ const featuredBooks = [
 
 const FeaturedBooks = () => {
   const { isDarkMode } = useTheme();
+  const { startLoading, stopLoading } = useLoading();
+
+  useEffect(() => {
+    const loadBooks = async () => {
+      startLoading();
+      try {
+        // Increased loading time to 3 seconds
+        await new Promise(resolve => setTimeout(resolve, 3000));
+        // In real app, you would fetch data here
+      } finally {
+        stopLoading();
+      }
+    };
+
+    loadBooks();
+  }, []);
 
   return (
-    <section className={`py-16 sm:py-24 ${
+    <section className={`py-8 ${
       isDarkMode 
         ? 'bg-gradient-to-b from-dark-300 to-dark-400' 
         : 'bg-gradient-to-b from-gray-100 to-white'
@@ -61,7 +79,7 @@ const FeaturedBooks = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="text-center mb-8"
         >
           <h2 className={`text-3xl sm:text-4xl md:text-5xl font-bold ${
             isDarkMode
@@ -131,7 +149,7 @@ const FeaturedBooks = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-center mt-12"
+          className="text-center mt-8"
         >
           <button className={`px-8 py-3 rounded-full font-semibold transform hover:scale-105 transition-all duration-300 ${
             isDarkMode

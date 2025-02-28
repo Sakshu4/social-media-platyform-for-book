@@ -23,7 +23,7 @@ const Gamification = () => {
   const { isDarkMode } = useTheme();
 
   return (
-    <section className={`py-16 ${
+    <section className={`py-8 ${
       isDarkMode ? 'bg-dark-400' : 'bg-gray-100'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -32,7 +32,7 @@ const Gamification = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="text-center mb-8"
         >
           <h2 className={`text-3xl sm:text-4xl font-bold mb-4 ${
             isDarkMode
@@ -48,7 +48,7 @@ const Gamification = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           {/* Leaderboard Section */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}

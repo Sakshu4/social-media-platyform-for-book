@@ -6,6 +6,7 @@ import { Menu, X, Book, Sun, Moon, Search, User } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../contexts/ThemeContext';
 import Button from './Button';
+import SearchBar from './SearchBar';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -80,20 +81,7 @@ const Navbar = () => {
               {/* Search Bar */}
               <div className="hidden lg:flex flex-1 min-w-[400px]">
                 <div className="relative w-full flex items-center gap-4">
-                  <div className="relative flex-1">
-                    <input
-                      type="text"
-                      placeholder="Search for books, authors, or genres..."
-                      className={`w-full py-2 px-4 pr-12 rounded-full outline-none transition-all duration-300 ${
-                        isDarkMode
-                          ? 'bg-dark-300/40 backdrop-blur-md border border-cyberpunk-blue/20 text-white placeholder-gray-400 focus:border-cyberpunk-blue/50 focus:bg-dark-300/60 hover:bg-dark-300/50'
-                          : 'bg-gray-100/40 backdrop-blur-md border border-gray-200 text-gray-900 placeholder-gray-500 focus:border-primary-500/50 focus:bg-white/60 hover:bg-gray-100/50'
-                      }`}
-                    />
-                    <Search className={`absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 ${
-                      isDarkMode ? 'text-gray-400' : 'text-gray-500'
-                    }`} />
-                  </div>
+                  <SearchBar className="flex-1" />
                   
                   {/* Theme Toggle */}
                   <motion.button
@@ -287,18 +275,7 @@ const Navbar = () => {
             <div className="px-4 py-6 space-y-4">
               {/* Mobile Search Bar */}
               <div className="relative w-full mb-4">
-                <input
-                  type="text"
-                  placeholder="Search..."
-                  className={`w-full py-2 px-4 pr-10 rounded-full outline-none transition-all duration-300 ${
-                    isDarkMode
-                      ? 'bg-dark-300/50 border border-cyberpunk-blue/20 text-white placeholder-gray-400 focus:border-cyberpunk-blue/50'
-                      : 'bg-gray-100 border border-gray-200 text-gray-900 placeholder-gray-500 focus:border-primary-500/50'
-                  }`}
-                />
-                <Search className={`absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 ${
-                  isDarkMode ? 'text-gray-400' : 'text-gray-500'
-                }`} />
+                <SearchBar isMobile={true} placeholder="Search..." />
               </div>
 
               {menuItems.map((item) => (

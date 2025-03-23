@@ -5,7 +5,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, EffectCoverflow } from 'swiper/modules';
 import { motion } from 'framer-motion';
 import { useTheme } from '../contexts/ThemeContext';
-import { useLoading } from '../contexts/LoadingContext';
 import BookCard from './BookCard';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -50,22 +49,6 @@ const featuredBooks = [
 
 const FeaturedBooks = () => {
   const { isDarkMode } = useTheme();
-  const { startLoading, stopLoading } = useLoading();
-
-  useEffect(() => {
-    const loadBooks = async () => {
-      startLoading();
-      try {
-        // Increased loading time to 3 seconds
-        await new Promise(resolve => setTimeout(resolve, 3000));
-        // In real app, you would fetch data here
-      } finally {
-        stopLoading();
-      }
-    };
-
-    loadBooks();
-  }, []);
 
   return (
     <section className={`py-8 ${

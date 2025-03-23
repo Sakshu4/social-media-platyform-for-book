@@ -1,9 +1,9 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { Trophy, Award, Star, BookOpen, ThumbsUp, Heart } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 
+// Fixed data outside component to prevent recreating on each render
 const topReaders = [
   { id: 1, name: "Emma Thompson", books: 42, reviews: 156, image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80" },
   { id: 2, name: "James Wilson", books: 38, reviews: 142, image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80" },
@@ -27,13 +27,7 @@ const Gamification = () => {
       isDarkMode ? 'bg-dark-400' : 'bg-gray-100'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-8"
-        >
+        <div className="text-center mb-8">
           <h2 className={`text-3xl sm:text-4xl font-bold mb-4 ${
             isDarkMode
               ? 'text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400'
@@ -46,19 +40,13 @@ const Gamification = () => {
           } max-w-2xl mx-auto text-lg`}>
             Earn badges, climb the leaderboard, and showcase your reading journey
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           {/* Leaderboard Section */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className={`${
-              isDarkMode ? 'bg-dark-300' : 'bg-white'
-            } rounded-xl shadow-xl p-6`}
-          >
+          <div className={`${
+            isDarkMode ? 'bg-dark-300' : 'bg-white'
+          } rounded-xl shadow-xl p-6`}>
             <h3 className={`text-2xl font-bold mb-6 flex items-center ${
               isDarkMode ? 'text-white' : 'text-gray-900'
             }`}>
@@ -68,12 +56,8 @@ const Gamification = () => {
             
             <div className="space-y-4">
               {topReaders.map((reader, index) => (
-                <motion.div
+                <div
                   key={reader.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
                   className={`flex items-center p-4 rounded-lg ${
                     isDarkMode ? 'bg-dark-200' : 'bg-gray-50'
                   }`}
@@ -103,21 +87,15 @@ const Gamification = () => {
                       {reader.books} books · {reader.reviews} reviews
                     </p>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
-          </motion.div>
+          </div>
 
           {/* Badges Section */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className={`${
-              isDarkMode ? 'bg-dark-300' : 'bg-white'
-            } rounded-xl shadow-xl p-6`}
-          >
+          <div className={`${
+            isDarkMode ? 'bg-dark-300' : 'bg-white'
+          } rounded-xl shadow-xl p-6`}>
             <h3 className={`text-2xl font-bold mb-6 flex items-center ${
               isDarkMode ? 'text-white' : 'text-gray-900'
             }`}>
@@ -127,12 +105,8 @@ const Gamification = () => {
             
             <div className="grid grid-cols-2 gap-4">
               {badges.map((badge, index) => (
-                <motion.div
+                <div
                   key={badge.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
                   className={`p-4 rounded-lg ${
                     isDarkMode ? 'bg-dark-200' : 'bg-gray-50'
                   }`}
@@ -157,10 +131,10 @@ const Gamification = () => {
                   <p className={`text-xs mt-1 text-right ${
                     isDarkMode ? 'text-gray-400' : 'text-gray-600'
                   }`}>{badge.progress}%</p>
-                </motion.div>
+                </div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

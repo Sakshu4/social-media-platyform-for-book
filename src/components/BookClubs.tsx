@@ -1,10 +1,8 @@
 'use client';
 
-import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Users, Calendar, MessageCircle } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
-import { useLoading } from '../contexts/LoadingContext';
 import Button from './Button';
 
 const bookClubs = [
@@ -39,22 +37,6 @@ const bookClubs = [
 
 const BookClubs = () => {
   const { isDarkMode } = useTheme();
-  const { startLoading, stopLoading } = useLoading();
-
-  useEffect(() => {
-    const loadClubs = async () => {
-      startLoading();
-      try {
-        // Increased loading time to 3 seconds
-        await new Promise(resolve => setTimeout(resolve, 3000));
-        // In real app, you would fetch clubs data here
-      } finally {
-        stopLoading();
-      }
-    };
-
-    loadClubs();
-  }, []);
 
   return (
     <section className={`py-8 ${
@@ -108,46 +90,54 @@ const BookClubs = () => {
                     : 'bg-gradient-to-t from-white via-transparent to-transparent'
                 }`} />
               </div>
-              
+
               <div className="p-6">
                 <h3 className={`text-xl font-bold mb-2 ${
                   isDarkMode ? 'text-white' : 'text-gray-900'
-                }`}>{club.name}</h3>
-                <p className={`${
+                }`}>
+                  {club.name}
+                </h3>
+                <p className={`mb-4 ${
                   isDarkMode ? 'text-gray-400' : 'text-gray-600'
-                } mb-4`}>{club.description}</p>
-                
-                <div className="space-y-3">
+                }`}>
+                  {club.description}
+                </p>
+
+                <div className="space-y-2">
                   <div className="flex items-center">
-                    <Users className={`w-5 h-5 ${
-                      isDarkMode ? 'text-primary-400' : 'text-primary-500'
+                    <Users className={`w-5 h-5 mr-2 ${
+                      isDarkMode ? 'text-purple-400' : 'text-primary-500'
                     }`} />
-                    <span className={`ml-2 ${
-                      isDarkMode ? 'text-gray-300' : 'text-gray-700'
-                    }`}>{club.members.toLocaleString()} members</span>
+                    <span className={isDarkMode ? 'text-gray-300' : 'text-gray-700'}>
+                      {club.members.toLocaleString()} members
+                    </span>
                   </div>
-                  
+
                   <div className="flex items-center">
-                    <Calendar className={`w-5 h-5 ${
-                      isDarkMode ? 'text-primary-400' : 'text-primary-500'
+                    <Calendar className={`w-5 h-5 mr-2 ${
+                      isDarkMode ? 'text-purple-400' : 'text-primary-500'
                     }`} />
-                    <span className={`ml-2 ${
-                      isDarkMode ? 'text-gray-300' : 'text-gray-700'
-                    }`}>Next meeting: {club.nextMeeting}</span>
+                    <span className={isDarkMode ? 'text-gray-300' : 'text-gray-700'}>
+                      Next meeting: {club.nextMeeting}
+                    </span>
                   </div>
-                  
+
                   <div className="flex items-center">
-                    <MessageCircle className={`w-5 h-5 ${
-                      isDarkMode ? 'text-primary-400' : 'text-primary-500'
+                    <MessageCircle className={`w-5 h-5 mr-2 ${
+                      isDarkMode ? 'text-purple-400' : 'text-primary-500'
                     }`} />
-                    <span className={`ml-2 ${
-                      isDarkMode ? 'text-gray-300' : 'text-gray-700'
-                    }`}>{club.activeDiscussions} active discussions</span>
+                    <span className={isDarkMode ? 'text-gray-300' : 'text-gray-700'}>
+                      {club.activeDiscussions} active discussions
+                    </span>
                   </div>
                 </div>
-                
+
                 <div className="mt-6">
-                  <Button variant="outline" className="w-full">
+                  <Button
+                    variant={isDarkMode ? 'primary' : 'secondary'}
+                    size="lg"
+                    className="w-full"
+                  >
                     Join Club
                   </Button>
                 </div>
@@ -155,18 +145,6 @@ const BookClubs = () => {
             </motion.div>
           ))}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-center mt-8"
-        >
-          <Button size="lg">
-            View All Book Clubs
-          </Button>
-        </motion.div>
       </div>
     </section>
   );

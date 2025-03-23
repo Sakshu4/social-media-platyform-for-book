@@ -4,9 +4,14 @@ import { useTheme } from '../contexts/ThemeContext';
 interface BookLoaderProps {
   size?: 'sm' | 'md' | 'lg';
   fullScreen?: boolean;
+  showText?: boolean;
 }
 
-const BookLoader: React.FC<BookLoaderProps> = ({ size = 'md', fullScreen = false }) => {
+const BookLoader: React.FC<BookLoaderProps> = ({ 
+  size = 'md', 
+  fullScreen = false,
+  showText = false 
+}) => {
   const { isDarkMode } = useTheme();
 
   const sizes = {
@@ -76,12 +81,14 @@ const BookLoader: React.FC<BookLoaderProps> = ({ size = 'md', fullScreen = false
         </motion.div>
       ))}
 
-      {/* Loading text */}
-      <div className={`absolute -bottom-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap text-sm font-medium ${
-        isDarkMode ? 'text-gray-300' : 'text-gray-600'
-      }`}>
-        Loading books...
-      </div>
+      {/* Loading text - only shown if showText is true */}
+      {showText && (
+        <div className={`absolute -bottom-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap text-sm font-medium ${
+          isDarkMode ? 'text-gray-300' : 'text-gray-600'
+        }`}>
+          Loading books...
+        </div>
+      )}
     </div>
   );
 
